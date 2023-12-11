@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // IndexedStack vs TabBarView
+      // IndexedStack: 모든 페이지를 시작시에 렌더링
       body: IndexedStack(
         index: currentIndex,
         children: const [
