@@ -1,8 +1,9 @@
 import 'package:apple_store/3-provider/cart.dart';
-import 'package:apple_store/3-provider/state/provider_cart.dart';
+import 'package:apple_store/3-provider/provider/providers.dart';
 import 'package:apple_store/3-provider/store.dart';
 import 'package:apple_store/common/bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,8 +21,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => CartProvider(),
+        StateNotifierProvider<CartList, CartListState>(
+          create: (context) => CartList(),
+        ),
+        StateNotifierProvider<CartProductCount, CartProductCountState>(
+          create: (context) => CartProductCount(),
         ),
       ],
       child: Scaffold(
@@ -37,7 +41,6 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomBar(
           currentIndex: currentIndex,
-          cartTotal: "0",
           onTap: (index) => setState(() {
             currentIndex = index;
           }),

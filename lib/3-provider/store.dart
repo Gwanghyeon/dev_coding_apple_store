@@ -1,4 +1,4 @@
-import 'package:apple_store/3-provider/state/provider_cart.dart';
+import 'package:apple_store/3-provider/provider/product_in_cart.dart';
 import 'package:apple_store/common/product.dart';
 import 'package:apple_store/common/product_tile.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class Store extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider=context.watch<CartProvider>();
+    final cartList = context.watch<CartListState>().cartList;
     return Scaffold(
       body: ListView.builder(
         itemCount: storeProductList.length,
@@ -19,8 +19,8 @@ class Store extends StatelessWidget {
           Product product = storeProductList[index];
           return ProductTile(
             product: product,
-            isInCart: cartProvider.productsInCart.contains(product),
-            onPressed: cartProvider.addOrRemoveProducts,
+            isInCart: cartList.contains(product),
+            onPressed: context.read<CartList>().addOrRemoveProduct,
           );
         },
       ),

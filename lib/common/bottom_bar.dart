@@ -1,25 +1,24 @@
+import 'package:apple_store/3-provider/provider/providers.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
     super.key,
     required this.currentIndex,
-    required this.cartTotal,
     this.onTap,
   });
 
   /// 현재 선택된 index
   final int currentIndex;
 
-  /// 카트에 담긴 상품 개수
-  final String cartTotal;
-
   /// 클릭 이벤트
   final void Function(int index)? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final cartTotal = context.watch<CartProductCountState>().count;
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
@@ -35,7 +34,7 @@ class BottomBar extends StatelessWidget {
           /// 카트에 담긴 상품 개수 Badge
           icon: badges.Badge(
             badgeContent: Text(
-              cartTotal,
+              '$cartTotal',
               style: const TextStyle(
                 fontSize: 12,
                 color: Colors.white,
