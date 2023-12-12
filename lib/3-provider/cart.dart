@@ -1,6 +1,8 @@
+import 'package:apple_store/3-provider/state/provider_cart.dart';
 import 'package:apple_store/common/product.dart';
 import 'package:apple_store/common/product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Cart extends StatelessWidget {
   const Cart({
@@ -9,10 +11,10 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> cartProductList = [];
-
+    final productsInCart = context.select<CartProvider, List<Product>>(
+        (cartProvider) => cartProvider.productsInCart);
     return Scaffold(
-      body: cartProductList.isEmpty
+      body: productsInCart.isEmpty
 
           /// Empty
           ? const Center(
@@ -24,13 +26,13 @@ class Cart extends StatelessWidget {
 
           /// Not Empty
           : ListView.builder(
-              itemCount: cartProductList.length,
+              itemCount:productsInCart.length,
               itemBuilder: (context, index) {
-                Product product = cartProductList[index];
+                Product product =productsInCart[index];
                 return ProductTile(
                   product: product,
                   isInCart: true,
-                  onPressed: (product) {},
+                  onPressed: context.read<CartProvider>().addOrRemoveProducts,
                 );
               },
             ),
