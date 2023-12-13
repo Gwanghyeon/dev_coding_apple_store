@@ -1,7 +1,5 @@
-import 'package:apple_store/3-provider/provider/providers.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
@@ -21,7 +19,6 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartTotal = context.watch<CartProductCountState>().count;
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
