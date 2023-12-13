@@ -39,12 +39,15 @@ class _HomePageState extends State<HomePage> {
             Cart(),
           ],
         ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          onTap: (index) => setState(() {
-            currentIndex = index;
-          }),
-        ),
+        bottomNavigationBar: Builder(builder: (context) {
+          return BottomBar(
+            currentIndex: currentIndex,
+            cartTotal: context.watch<CartProductCountState>().count,
+            onTap: (index) => setState(() {
+              currentIndex = index;
+            }),
+          );
+        }),
       ),
     );
   }
