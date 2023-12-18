@@ -18,26 +18,28 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // IndexedStack vs TabBarView
-      // IndexedStack: 모든 페이지를 시작시에 렌더링
-      body: IndexedStack(
-        index: currentIndex,
-        children: const [
-          /// Store
-          Store(),
+    return ProviderScope(
+      child: Scaffold(
+        // IndexedStack vs TabBarView
+        // IndexedStack: 모든 페이지를 시작시에 렌더링
+        body: IndexedStack(
+          index: currentIndex,
+          children: const [
+            /// Store
+            Store(),
 
-          /// Cart
-          Cart(),
-        ],
-      ),
-      bottomNavigationBar: Consumer(
-        builder: (context, ref, child) => BottomBar(
-          currentIndex: currentIndex,
-          cartTotal: ref.watch(badgeCountProvider),
-          onTap: (index) => setState(() {
-            currentIndex = index;
-          }),
+            /// Cart
+            Cart(),
+          ],
+        ),
+        bottomNavigationBar: Consumer(
+          builder: (context, ref, child) => BottomBar(
+            currentIndex: currentIndex,
+            cartTotal: ref.watch(badgeCountProvider),
+            onTap: (index) => setState(() {
+              currentIndex = index;
+            }),
+          ),
         ),
       ),
     );
