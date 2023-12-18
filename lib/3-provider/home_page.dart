@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomBar(
           currentIndex: currentIndex,
+          cartTotal: 0,
           onTap: (index) => setState(() {
             currentIndex = index;
           }),
